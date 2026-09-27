@@ -66,10 +66,19 @@
     <main id="projects">
 
       <article class="project" id="self-improving-agent">
-        <header class="p-head">
-          <h2>Self-Improving Agent for Any Task</h2>
-          <p class="p-kind">자기개선 에이전트 연구</p>
+        <header class="p-head p-banner p-banner--chart">
+          <img class="p-banner-img" src="images/rsi-banner.webp" width="936" height="545" loading="lazy" alt="자기개선 에이전트의 진화 lineage 트리. 각 노드는 한 세대의 에이전트와 점수를 나타내며, 가장 높은 점수 0.625는 초록 다이아몬드로 표시된 #12.">
+          <div class="p-banner-text">
+            <h2>Self-Improving Agent for Any Task</h2>
+            <p class="p-kind">자기개선 에이전트 연구</p>
+          </div>
         </header>
+        <figure class="shots">
+          <div class="shots-scroll" tabindex="0" role="region" aria-label="Counterfactual 검증 다이어그램">
+            <a href="images/rsi-counterfactual.webp"><img src="images/rsi-counterfactual.webp" width="1491" height="704" loading="lazy" alt="Counterfactual 검증 다이어그램. 실제 라운드 1부터 k까지를 재생해 checkpoint를 만든 뒤, 원본 코드의 Control과 후보 패치를 적용한 Treatment로 분기해 각각 실제 reward를 얻는다. 두 분기는 같은 상태에서 출발하므로 결과 차이는 패치 때문이다."></a>
+          </div>
+          <figcaption>Counterfactual 검증: 실패 지점의 실제 checkpoint를 재구성한 뒤, 원본 코드(Control)와 패치를 적용한 코드(Treatment)로 분기해 실제 reward를 비교함.</figcaption>
+        </figure>
         <div class="p-grid">
           <aside class="p-meta" aria-label="프로젝트 정보">
             <dl>

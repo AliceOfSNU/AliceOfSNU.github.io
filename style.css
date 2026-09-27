@@ -311,6 +311,24 @@ mark {
 
 .p-banner .p-kind { color: #3B4661; }
 
+/* Chart banner: the whole chart sits on the page color, right-aligned, with the title over its empty top-left. */
+.p-banner--chart { padding-top: 2.5rem; }
+
+.p-banner--chart .p-banner-img {
+  width: 64%;
+  margin-left: auto;
+  aspect-ratio: auto;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.p-banner--chart .p-banner-text {
+  top: 0;
+  bottom: auto;
+  left: 0;
+  max-width: 34rem;
+}
+
 /* Full-width screenshot strip above a project's details; scrolls sideways on phones. */
 .shots { margin: 0 0 clamp(2.5rem, 5vw, 3.5rem); }
 
@@ -381,6 +399,29 @@ mark {
   .p-banner-img { aspect-ratio: 1 / 1; object-position: 50% 30%; }
 
   .p-banner-text { padding: 0.65rem 1rem 0.75rem; }
+
+  .p-banner--chart {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .p-banner--chart { padding-top: 0; }
+
+  .p-banner--chart .p-banner-img {
+    width: 100%;
+    margin: 0;
+  }
+
+  .p-banner--chart .p-banner-text {
+    position: static;
+    order: -1;
+    max-width: none;
+    padding: 0 0 1rem;
+    background: none;
+    border: 0;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
 }
 
 @media (max-width: 44rem) {
