@@ -115,7 +115,12 @@ mark {
   margin: 0 0 1.25rem;
 }
 
-.contact { margin: 0; }
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.75rem;
+  margin: 0;
+}
 
 /* Project index --------------------------------------------------------- */
 
@@ -325,6 +330,12 @@ mark {
 }
 
 .foot p { margin: 0; }
+
+.foot-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.25rem;
+}
 
 /* Narrow screens -------------------------------------------------------- */
 
