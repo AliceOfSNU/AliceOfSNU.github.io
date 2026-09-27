@@ -288,6 +288,29 @@ mark {
   margin-top: 0.5rem;
 }
 
+/* Full-width screenshot strip above a project's details; scrolls sideways on phones. */
+.shots { margin: 0 0 clamp(2.5rem, 5vw, 3.5rem); }
+
+.shots-scroll { overflow-x: auto; }
+
+.shots-scroll:focus-visible {
+  outline: 2px solid var(--cobalt);
+  outline-offset: 4px;
+}
+
+.shots img {
+  display: block;
+  width: 100%;
+  min-width: 46rem;
+  height: auto;
+}
+
+.shots figcaption {
+  color: var(--slate);
+  font-size: 0.9rem;
+  margin-top: 0.75rem;
+}
+
 /* Footer ---------------------------------------------------------------- */
 
 .foot {
