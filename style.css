@@ -7,24 +7,11 @@
   --rule: #D3D9E2;
   --cobalt: #2346D1;
   --hl: #FFE45C;
-  --hl-ink: inherit;
 
   --serif: "Hahmlet", "Noto Serif KR", "AppleMyungjo", serif;
   --sans: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
 
-  color-scheme: light dark;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #0F1627;
-    --ink: #E3E8F1;
-    --slate: #9AA4B8;
-    --rule: #28334B;
-    --cobalt: #9DB1FF;
-    --hl: rgba(255, 221, 64, 0.34);
-    --hl-ink: #FFF3C4;
-  }
+  color-scheme: light;
 }
 
 /* Base ------------------------------------------------------------------ */
@@ -67,7 +54,7 @@ strong { font-weight: 600; }
 
 /* The highlighter: used only on measured results. */
 mark {
-  color: var(--hl-ink);
+  color: inherit;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   padding: 0 0.14em;
@@ -293,6 +280,37 @@ mark {
   margin-top: 0.5rem;
 }
 
+/* Banner header: the title panel overlaps the image and blurs what sits behind it. */
+.p-banner {
+  position: relative;
+  border-top: 0;
+  padding-top: 0;
+}
+
+.p-banner-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1916 / 821;
+  object-fit: cover;
+  object-position: 50% 35%;
+  -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent);
+  mask-image: linear-gradient(to bottom, #000 62%, transparent);
+}
+
+.p-banner-text {
+  position: absolute;
+  left: clamp(0.75rem, 3vw, 2rem);
+  bottom: clamp(0.25rem, 1.5vw, 1rem);
+  padding: 0.9rem 1.5rem 1rem;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  backdrop-filter: blur(16px) saturate(1.4);
+}
+
+.p-banner .p-kind { color: #3B4661; }
+
 /* Full-width screenshot strip above a project's details; scrolls sideways on phones. */
 .shots { margin: 0 0 clamp(2.5rem, 5vw, 3.5rem); }
 
@@ -359,6 +377,10 @@ mark {
   }
 
   .p-meta dt, .p-meta dd { margin: 0; }
+
+  .p-banner-img { aspect-ratio: 1 / 1; object-position: 50% 30%; }
+
+  .p-banner-text { padding: 0.65rem 1rem 0.75rem; }
 }
 
 @media (max-width: 44rem) {
