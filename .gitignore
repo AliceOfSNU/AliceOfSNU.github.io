@@ -1,2 +1,5 @@
 # Raw screenshots with unblurred names. Publish redacted copies from images/ instead.
 MOCA/
+
+# Raw GIFs are hundreds of MB; publish the converted clips from images/ instead.
+Modeling/

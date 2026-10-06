@@ -352,6 +352,39 @@ mark {
   margin-top: 0.75rem;
 }
 
+/* Looping video clips shown side by side, each with a small label. */
+.clips {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.clip { position: relative; }
+
+.clip video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+}
+
+.clip-label {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 4px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
 /* Footer ---------------------------------------------------------------- */
 
 .foot {
@@ -425,6 +458,8 @@ mark {
 }
 
 @media (max-width: 44rem) {
+  .clips { grid-template-columns: minmax(0, 1fr); }
+
   .index a {
     grid-template-columns: minmax(0, 1fr);
     gap: 0.2rem;

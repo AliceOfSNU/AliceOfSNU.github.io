@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hanjun Kim | 2026 프로젝트</title>
-  <meta name="description" content="자기개선 에이전트, 각본 제작 에이전트, 실서비스 멀티에이전트, GPU 커널 최적화까지. Hanjun Kim의 2026년 프로젝트.">
-  <meta property="og:title" content="Hanjun Kim | 2026 프로젝트">
-  <meta property="og:description" content="자기개선 에이전트, 각본 제작 에이전트, 실서비스 멀티에이전트, GPU 커널 최적화까지.">
+  <title>Hanjun Kim | 프로젝트</title>
+  <meta name="description" content="자기개선 에이전트, 각본 제작 에이전트, 실서비스 멀티에이전트, GPU 커널 최적화, 논문 구현과 모델 학습까지. Hanjun Kim의 프로젝트.">
+  <meta property="og:title" content="Hanjun Kim | 프로젝트">
+  <meta property="og:description" content="자기개선 에이전트, 각본 제작 에이전트, 실서비스 멀티에이전트, GPU 커널 최적화, 논문 구현과 모델 학습까지.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aliceofsnu.github.io/">
   <meta name="theme-color" content="#F4F6F8">
@@ -26,11 +26,13 @@
       <p class="contact">
         <a href="mailto:khjune29@gmail.com">khjune29@gmail.com</a>
         <a href="https://github.com/AliceOfSNU">github.com/AliceOfSNU</a>
+        <a href="https://velog.io/@dalcomi20/posts">Blog</a>
+        <a href="https://solved.ac/en/profile/dalcomi20">solved.ac</a>
       </p>
     </header>
 
     <nav class="index" aria-labelledby="index-title">
-      <h2 id="index-title">2026년 프로젝트</h2>
+      <h2 id="index-title">프로젝트</h2>
       <ul>
         <li>
           <a href="#self-improving-agent">
@@ -58,6 +60,13 @@
             <span class="i-name">MoCA</span>
             <span class="i-kind">실서비스 멀티에이전트</span>
             <span class="i-result">서비스 1주차 <mark>멤버 14명</mark></span>
+          </a>
+        </li>
+        <li>
+          <a href="#modeling">
+            <span class="i-name">논문 읽고 모델링 및 Training 경험</span>
+            <span class="i-kind">PyTorch 논문 구현과 학습</span>
+            <span class="i-result">Diffusion Policy로 <mark>주방 task 5개</mark></span>
           </a>
         </li>
       </ul>
@@ -291,15 +300,77 @@
         </div>
       </article>
 
+      <article class="project" id="modeling">
+        <header class="p-head">
+          <h2>논문 읽고 모델링 및 Training 경험</h2>
+          <p class="p-kind">PyTorch로 논문을 구현하고 렌탈 GPU에서 직접 학습</p>
+        </header>
+        <figure class="shots">
+          <div class="clips">
+            <div class="clip">
+              <video poster="images/diffusion-before.webp" width="960" height="720" autoplay muted loop playsinline preload="metadata" aria-label="학습 전: 로봇 팔이 주방 환경에서 task를 끝내지 못하고 헤매는 모습">
+                <source src="images/diffusion-before.mp4" type='video/mp4; codecs="avc1.64001F"'>
+                <source src="images/diffusion-before.webm" type='video/webm; codecs="vp9"'>
+              </video>
+              <span class="clip-label">학습 전</span>
+            </div>
+            <div class="clip">
+              <video poster="images/diffusion-after.webp" width="960" height="720" autoplay muted loop playsinline preload="metadata" aria-label="학습 후: 로봇 팔이 전자레인지 열기, 주전자 옮기기, 화구 켜기, 수납장 열기 등 task를 차례로 수행하는 모습">
+                <source src="images/diffusion-after.mp4" type='video/mp4; codecs="avc1.64001F"'>
+                <source src="images/diffusion-after.webm" type='video/webm; codecs="vp9"'>
+              </video>
+              <span class="clip-label">학습 후</span>
+            </div>
+          </div>
+          <figcaption>Diffusion Policy로 학습한 로봇 팔이 Multi-task 주방 환경에서 task를 수행하는 모습.</figcaption>
+        </figure>
+        <div class="p-grid">
+          <aside class="p-meta" aria-label="프로젝트 정보">
+            <dl>
+              <dt>기간</dt>
+              <dd>2023–2025, 꾸준히</dd>
+              <dt>기술</dt>
+              <dd>PyTorch</dd>
+              <dt>링크</dt>
+              <dd><a href="https://www.youtube.com/watch?v=0uYgOdm4M_M">DDPM</a> (YouTube)<br><a href="https://forge.coreweave.com/wandb/cvl2023/LAS_asr/reports/ASR-LAS-Initial-Runs--Vmlldzo2NjkzNDcx">LAS</a> (W&amp;B 리포트)</dd>
+            </dl>
+          </aside>
+          <div class="p-body">
+            <p class="p-summary">Arxiv에 올라온 논문을 보고 PyTorch로 각종 모델과 데이터/학습 파이프라인을 구현하고, 렌탈 GPU에서 실제로 작은 규모로 학습시키는 연습을 2년 넘게 해 옴. Diffusion Policy RL부터 Discrete Flow, Diffusion Sampler 등 비교적 최신 아이디어들도 toy‑size로나마 구현하며, LLM을 넘어 AI 전반의 연구 동향을 파악하고 있음.</p>
+
+            <h3>Diffusion: 고양이부터 강화학습까지</h3>
+            <ul>
+              <li>간단한 고양이를 생성하는 diffusion schedule, UNet부터 시작</li>
+              <li>Diffusion Policy라는 비교적 최근 RL(강화학습) 기법으로 Multi-task 주방 환경에서 <mark>5개 task</mark> 학습</li>
+            </ul>
+
+            <h3>Listen, Attend and Spell: Speech-to-Text 모델 구현</h3>
+            <ul>
+              <li>Encoder-Attention-Decoder 구조</li>
+              <li>CMU Kaggle 데이터셋에서 작은 모델(64-dim attention)은 Levenshtein distance <mark>14.8</mark>, 큰 모델(128-dim)은 <mark>10.9</mark>를 얻어 scaling 효과를 확인함</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
     </main>
 
     <footer class="foot">
-      <p>Hanjun Kim, 2026년 9월 업데이트</p>
+      <p>Hanjun Kim, 2026년 10월 업데이트</p>
       <p class="foot-links">
         <a href="mailto:khjune29@gmail.com">khjune29@gmail.com</a>
         <a href="https://github.com/AliceOfSNU">GitHub</a>
       </p>
     </footer>
   </div>
+  <script>
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document.querySelectorAll("video[autoplay]").forEach((v) => {
+        v.removeAttribute("autoplay");
+        v.pause();
+        v.controls = true;
+      });
+    }
+  </script>
 </body>
 </html>
