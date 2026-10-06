@@ -35,27 +35,6 @@
       <h2 id="index-title">프로젝트</h2>
       <ul>
         <li>
-          <a href="#self-improving-agent">
-            <span class="i-name">Self-Improving Agent for Any Task</span>
-            <span class="i-kind">자기개선 에이전트 연구</span>
-            <span class="i-result">DeepSWE 성공률 <mark>0.02 → 0.625</mark></span>
-          </a>
-        </li>
-        <li>
-          <a href="#narrative">
-            <span class="i-name">양방향 내러티브 파이프라인</span>
-            <span class="i-kind">창작을 위한 LLM 에이전트</span>
-            <span class="i-result">오리지널 애니 <mark>1화 각본 1,250줄</mark></span>
-          </a>
-        </li>
-        <li>
-          <a href="#flashmla">
-            <span class="i-name">DSV FlashMLA Kernel Optimization</span>
-            <span class="i-kind">GPU 커널 최적화</span>
-            <span class="i-result">Combine kernel <mark>최대 8.8% 가속</mark></span>
-          </a>
-        </li>
-        <li>
           <a href="#moca">
             <span class="i-name">MoCA</span>
             <span class="i-kind">실서비스 멀티에이전트</span>
@@ -69,184 +48,31 @@
             <span class="i-result">Diffusion Policy로 <mark>주방 task 5개</mark></span>
           </a>
         </li>
+        <li>
+          <a href="#narrative">
+            <span class="i-name">양방향 내러티브 파이프라인</span>
+            <span class="i-kind">창작을 위한 LLM 에이전트</span>
+            <span class="i-result">오리지널 애니 <mark>1화 각본 1,250줄</mark></span>
+          </a>
+        </li>
+        <li>
+          <a href="#self-improving-agent">
+            <span class="i-name">Self-Improving Agent for Any Task</span>
+            <span class="i-kind">자기개선 에이전트 연구</span>
+            <span class="i-result">DeepSWE 성공률 <mark>0.02 → 0.625</mark></span>
+          </a>
+        </li>
+        <li>
+          <a href="#flashmla">
+            <span class="i-name">DSV FlashMLA Kernel Optimization</span>
+            <span class="i-kind">GPU 커널 최적화</span>
+            <span class="i-result">Combine kernel <mark>최대 8.8% 가속</mark></span>
+          </a>
+        </li>
       </ul>
     </nav>
 
     <main id="projects">
-
-      <article class="project" id="self-improving-agent">
-        <header class="p-head p-banner p-banner--chart">
-          <img class="p-banner-img" src="images/rsi-banner.webp" width="936" height="545" loading="lazy" alt="자기개선 에이전트의 진화 lineage 트리. 각 노드는 한 세대의 에이전트와 점수를 나타내며, 가장 높은 점수 0.625는 초록 다이아몬드로 표시된 #12.">
-          <div class="p-banner-text">
-            <h2>Self-Improving Agent for Any Task</h2>
-            <p class="p-kind">자기개선 에이전트 연구</p>
-          </div>
-        </header>
-        <figure class="shots">
-          <div class="shots-scroll" tabindex="0" role="region" aria-label="Counterfactual 검증 다이어그램">
-            <a href="images/rsi-counterfactual.webp"><img src="images/rsi-counterfactual.webp" width="1491" height="704" loading="lazy" alt="Counterfactual 검증 다이어그램. 실제 라운드 1부터 k까지를 재생해 checkpoint를 만든 뒤, 원본 코드의 Control과 후보 패치를 적용한 Treatment로 분기해 각각 실제 reward를 얻는다. 두 분기는 같은 상태에서 출발하므로 결과 차이는 패치 때문이다."></a>
-          </div>
-          <figcaption>Counterfactual 검증: 실패 지점의 실제 checkpoint를 재구성한 뒤, 원본 코드(Control)와 패치를 적용한 코드(Treatment)로 분기해 실제 reward를 비교함.</figcaption>
-        </figure>
-        <div class="p-grid">
-          <aside class="p-meta" aria-label="프로젝트 정보">
-            <dl>
-              <dt>기반</dt>
-              <dd>DGM-H (HyperAgents), A-Mem</dd>
-              <dt>모델</dt>
-              <dd>DeepSeek-V4-Flash-0731<br>DeepSeek-R1-Distill-Qwen-32B</dd>
-              <dt>벤치마크</dt>
-              <dd>Deep-SWE<br>CMU-FoodTruck Bench</dd>
-              <dt>링크</dt>
-              <dd><a href="https://github.com/AliceOfSNU/HyperAgents">GitHub</a> (에이전트가 직접 올린 PR 포함)</dd>
-            </dl>
-          </aside>
-          <div class="p-body">
-            <p class="p-summary"><strong>DGM-H</strong>(HyperAgents)라는 자기개선 에이전트 위에 <strong>A-Mem</strong>(메모리)과 <strong>Causal Attribution</strong> 툴을 추가함. Deep-SWE에서는 DeepSeek-V4-Flash-0731 모델로 코딩 에이전트의 개선을, 더 작은 CMU-FoodTruck Bench에서는 DeepSeek-R1-Distill-Qwen-32B 모델로 가게 운영 에이전트의 개선을 확인함.</p>
-
-            <h3>방법</h3>
-            <ul>
-              <li>Agent trajectory에서 <strong>실패의 원인이 되는 지점을 특정</strong>(Causal Attribution)하고, 개선 에이전트가 Patch를 통해 <strong>행동이 수정되는지 빠르게 검증</strong>(Counterfactual Analysis)할 수 있는 툴을 제공해 자기개선의 효율을 높임</li>
-              <li>실패 지점에서 Agent가 보고 있던 상태를 정확히 재현하기 위해, Agent를 FSM으로 구현하고 trajectory의 모든 step에서 state를 저장하는 방식을 제안함</li>
-            </ul>
-
-            <h3>결과</h3>
-            <ul>
-              <li>DeepSWE subset 성공률 <mark>0.02 → 0.625</mark>. 기본 file tool만 가진 에이전트에서 출발해 Multi-pass와 Compaction을 지원하는 에이전트로 발전함
-                <ul>
-                  <li>코드 리뷰 pass와 엣지 케이스를 시험하는 adversarial pass 도입</li>
-                  <li>오래된 tool-call 결과를 점진적으로 truncate하는 compaction 도입</li>
-                </ul>
-              </li>
-              <li>자기개선 에이전트가 <mark>PR 23개</mark>를 오픈하고, 초기 에이전트가 가진 tool 관련 버그 2개를 수정함</li>
-              <li>메타 에이전트 자신에 대한 개선 (진정한 의미의 재귀적 자기개선)
-                <ul>
-                  <li>프롬프트를 재작성해 ‘이전 시도의 약점을 파악하고 타겟팅된 개선을 하라’는 지침을 세움</li>
-                  <li>에이전트의 진화 lineage와 각 세대의 eval report·점수를 요약해 자기 자신의 프롬프트에 주입하는 함수를 만듦</li>
-                  <li>bash.py처럼 위험한 파일을 건드릴 때 smoke test를 거치는 안전장치를 도입</li>
-                </ul>
-              </li>
-              <li>실제 Reward Hacking 시도들이 PR human-review 게이트에서 차단됨. Long-running loop에서 human supervision의 중요성을 확인함</li>
-            </ul>
-          </div>
-        </div>
-      </article>
-
-      <article class="project" id="narrative">
-        <header class="p-head p-banner">
-          <img class="p-banner-img" src="images/narrative-banner.webp" width="1672" height="941" loading="lazy" alt="연습실에서 마이크를 들고 노래하는 연습생과 동료들, 클립보드를 든 프로듀서의 뒷모습을 그린 애니메이션 풍 일러스트">
-          <div class="p-banner-text">
-            <h2>양방향 내러티브 파이프라인</h2>
-            <p class="p-kind">창작을 위한 LLM 에이전트 시스템</p>
-          </div>
-        </header>
-        <figure class="shots">
-          <div class="shots-scroll" tabindex="0" role="region" aria-label="CoWriter, CoReader 스크린샷">
-            <a href="images/narrative.webp"><img src="images/narrative.webp" width="2000" height="1583" loading="lazy" alt="앱 화면 두 장. 위는 CoWriter로, 에피소드별 beats, draft, scenelist 파일 트리와 작가와 에이전트의 대화, 씬 설계 YAML 편집기. 아래는 CoReader로, 마법소녀 마도카 마기카 원작을 변환한 지식 그래프와 마도카 캐릭터 챗봇 창."></a>
-          </div>
-          <figcaption>위는 각본 제작 에이전트 CoWriter: 패스별 산출물 트리, 작가와 에이전트의 대화, 씬 설계 YAML. 아래는 작품 역설계 엔진 CoReader: ‘마법소녀 마도카☆마기카’ 지식 그래프와 마도카 캐릭터 챗봇.</figcaption>
-        </figure>
-        <div class="p-grid">
-          <aside class="p-meta" aria-label="프로젝트 정보">
-            <dl>
-              <dt>구성</dt>
-              <dd>각본 제작 에이전트<br>스토리 역설계 엔진</dd>
-              <dt>스택</dt>
-              <dd>Python, TypeScript</dd>
-              <dt>설계</dt>
-              <dd>GPT5.6 Sol, Claude Opus5</dd>
-              <dt>링크</dt>
-              <dd><a href="https://ai--rio8om1.gamma.site/">기술 슬라이드</a> (Gamma)</dd>
-            </dl>
-          </aside>
-          <div class="p-body">
-            <p class="p-summary">Pass 기반 <strong>각본 제작 에이전트</strong>와 지식 그래프 기반 <strong>스토리 역설계 엔진</strong>. 제 창작물 ‘내친구가데뷔했고나는그녀의프로듀서가되었다’와 ‘마법소녀 마도카☆마기카’의 마도카 캐릭터 챗봇으로 실제 사례에서 검증함.</p>
-
-            <h3>개발 방식</h3>
-            <ul>
-              <li>GPT5.6 Sol, Claude Opus5와 3일간 토론하며 spec 문서와 예제(‘내친구가데뷔했고…’) 작성</li>
-              <li>Python/TypeScript 코드는 패스별 spec 문서를 기반으로 Claude가 작성</li>
-            </ul>
-
-            <h3>방법</h3>
-            <h4>각본 제작 에이전트</h4>
-            <ul>
-              <li>8개의 SKILL 기반 패스로 기획서를 Fountain 각본으로 내림
-                <ul>
-                  <li>ECON(에피소드 계약), SCENELIST(씬 목록화), BEATS(장면 비트 작성) 등의 패스를 각각 독립적인 스킬로 구성</li>
-                </ul>
-              </li>
-              <li>패스마다 Prefix 설계를 통한 캐시 친화적 Compaction으로 긴 맥락을 관리</li>
-              <li>웹 기반 인터랙티브 채팅/에디터 UI로 기술을 잘 모르는 작가도 쉽게 사용하도록 제작</li>
-            </ul>
-            <h4>작품 역설계 엔진</h4>
-            <ul>
-              <li>LLM이 다른 작가의 작품을 읽고 세계관과 스토리를 지식 그래프 DB로 변환
-                <ul>
-                  <li>한 챕터씩 incremental하게 그래프를 성장시킬 수 있음</li>
-                  <li>에이전트를 위한 임베딩 모델 기반 <strong>검색 Tool</strong>과 하네스 레벨의 <strong>SQL 쿼리 Tool</strong></li>
-                </ul>
-              </li>
-              <li>만들어진 지식 그래프는 다양한 downstream 작업에 쓸 수 있음
-                <ul>
-                  <li>downstream 작업의 한 예시로 <strong>캐릭터 챗봇</strong>을 구현</li>
-                  <li>세계관/설정 변경 놀이, 멀티에이전트 캐릭터 시뮬레이션 등 다양한 작업에 응용 가능</li>
-                </ul>
-              </li>
-            </ul>
-
-            <h3>결과</h3>
-            <ul>
-              <li>오리지널 애니메이션 ‘내친구가데뷔했고나는그녀의프로듀서가되었다’(24분×10화)를 기획서에서 출발해 <mark>103.7M 토큰</mark>으로 <mark>1화 각본 1,250줄</mark> 완성. 2화도 10개 씬 트리트먼트 작업 완료
-                <ul>
-                  <li>8개의 시퀀스, 15개의 씬, 5개의 비트 시트 등 모든 중간 결과물 공유 가능</li>
-                  <li>국어국문학 전공 작가 지망생에게 긍정적인 피드백을 받음</li>
-                </ul>
-              </li>
-              <li>유명 애니메이션 ‘마법소녀 마도카☆마기카’의 약 7%를 지식 그래프로 변환하고 마도카 캐릭터 챗봇에서 사용
-                <ul>
-                  <li><mark>노드 272개</mark>(원문 링크 노드 포함), <mark>엣지 714개</mark>로 소설의 초반 200줄을 표현</li>
-                  <li>일본어 말투까지 마도카(주인공)와 똑 닮은 챗봇 (실제로 대화해 보면 아주 재밌음)</li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </article>
-
-      <article class="project" id="flashmla">
-        <header class="p-head">
-          <h2>DSV FlashMLA Kernel Optimization Research</h2>
-          <p class="p-kind">GPU 커널 최적화</p>
-        </header>
-        <div class="p-grid">
-          <aside class="p-meta" aria-label="프로젝트 정보">
-            <dl>
-              <dt>모델</dt>
-              <dd>DeepSeek V4 Flash</dd>
-              <dt>환경</dt>
-              <dd>vLLM, NVIDIA B200</dd>
-              <dt>대상</dt>
-              <dd>FlashMLA SplitKV / Combine kernel</dd>
-            </dl>
-          </aside>
-          <div class="p-body">
-            <p class="p-summary">DeepSeek V4 Flash는 SWA, HCA, CSA의 세 가지 Attention tier로 길고 짧은 context를 통합함. vLLM에서 이 모델이 사용하는 B200 커널들을 프로파일링하고, FlashMLA의 SplitKV/Combine kernel을 최적화 대상으로 찾아냄.</p>
-
-            <h3>방법</h3>
-            <ul>
-              <li>MLA attention 안의 Split KV에 이어지는 Combine kernel을 최적화해 low-batch(long context) regime에서 decode 속도를 높임</li>
-              <li>thread당 in-flight prefetch 개수를 split 1개에서 8개로 늘려 메모리 latency를 감춤</li>
-            </ul>
-
-            <h3>결과</h3>
-            <ul>
-              <li>HCA attention의 combine kernel이 1M context, batch 8에서 <mark>8.8%</mark>, 256K context, batch 8에서 <mark>4.3%</mark> 빨라짐</li>
-              <li>CSA attention의 combine kernel이 batch 4에서 <mark>6.9%</mark> 빨라짐 (CSA는 context length와 무관)</li>
-            </ul>
-          </div>
-        </div>
-      </article>
 
       <article class="project" id="moca">
         <header class="p-head p-banner">
@@ -348,6 +174,180 @@
             <ul>
               <li>Encoder-Attention-Decoder 구조</li>
               <li>CMU Kaggle 데이터셋에서 작은 모델(64-dim attention)은 Levenshtein distance <mark>14.8</mark>, 큰 모델(128-dim)은 <mark>10.9</mark>를 얻어 scaling 효과를 확인함</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="project" id="narrative">
+        <header class="p-head p-banner">
+          <img class="p-banner-img" src="images/narrative-banner.webp" width="1672" height="941" loading="lazy" alt="연습실에서 마이크를 들고 노래하는 연습생과 동료들, 클립보드를 든 프로듀서의 뒷모습을 그린 애니메이션 풍 일러스트">
+          <div class="p-banner-text">
+            <h2>양방향 내러티브 파이프라인</h2>
+            <p class="p-kind">창작을 위한 LLM 에이전트 시스템</p>
+          </div>
+        </header>
+        <figure class="shots">
+          <div class="shots-scroll" tabindex="0" role="region" aria-label="CoWriter, CoReader 스크린샷">
+            <a href="images/narrative.webp"><img src="images/narrative.webp" width="2000" height="1583" loading="lazy" alt="앱 화면 두 장. 위는 CoWriter로, 에피소드별 beats, draft, scenelist 파일 트리와 작가와 에이전트의 대화, 씬 설계 YAML 편집기. 아래는 CoReader로, 마법소녀 마도카 마기카 원작을 변환한 지식 그래프와 마도카 캐릭터 챗봇 창."></a>
+          </div>
+          <figcaption>위는 각본 제작 에이전트 CoWriter: 패스별 산출물 트리, 작가와 에이전트의 대화, 씬 설계 YAML. 아래는 작품 역설계 엔진 CoReader: ‘마법소녀 마도카☆마기카’ 지식 그래프와 마도카 캐릭터 챗봇.</figcaption>
+        </figure>
+        <div class="p-grid">
+          <aside class="p-meta" aria-label="프로젝트 정보">
+            <dl>
+              <dt>구성</dt>
+              <dd>각본 제작 에이전트<br>스토리 역설계 엔진</dd>
+              <dt>스택</dt>
+              <dd>Python, TypeScript</dd>
+              <dt>설계</dt>
+              <dd>GPT5.6 Sol, Claude Opus5</dd>
+              <dt>링크</dt>
+              <dd><a href="https://ai--rio8om1.gamma.site/">기술 슬라이드</a> (Gamma)</dd>
+            </dl>
+          </aside>
+          <div class="p-body">
+            <p class="p-summary">Pass 기반 <strong>각본 제작 에이전트</strong>와 지식 그래프 기반 <strong>스토리 역설계 엔진</strong>. 제 창작물 ‘내친구가데뷔했고나는그녀의프로듀서가되었다’와 ‘마법소녀 마도카☆마기카’의 마도카 캐릭터 챗봇으로 실제 사례에서 검증함.</p>
+
+            <h3>개발 방식</h3>
+            <ul>
+              <li>GPT5.6 Sol, Claude Opus5와 3일간 토론하며 spec 문서와 예제(‘내친구가데뷔했고…’) 작성</li>
+              <li>Python/TypeScript 코드는 패스별 spec 문서를 기반으로 Claude가 작성</li>
+            </ul>
+
+            <h3>방법</h3>
+            <h4>각본 제작 에이전트</h4>
+            <ul>
+              <li>8개의 SKILL 기반 패스로 기획서를 Fountain 각본으로 내림
+                <ul>
+                  <li>ECON(에피소드 계약), SCENELIST(씬 목록화), BEATS(장면 비트 작성) 등의 패스를 각각 독립적인 스킬로 구성</li>
+                </ul>
+              </li>
+              <li>패스마다 Prefix 설계를 통한 캐시 친화적 Compaction으로 긴 맥락을 관리</li>
+              <li>웹 기반 인터랙티브 채팅/에디터 UI로 기술을 잘 모르는 작가도 쉽게 사용하도록 제작</li>
+            </ul>
+            <h4>작품 역설계 엔진</h4>
+            <ul>
+              <li>LLM이 다른 작가의 작품을 읽고 세계관과 스토리를 지식 그래프 DB로 변환
+                <ul>
+                  <li>한 챕터씩 incremental하게 그래프를 성장시킬 수 있음</li>
+                  <li>에이전트를 위한 임베딩 모델 기반 <strong>검색 Tool</strong>과 하네스 레벨의 <strong>SQL 쿼리 Tool</strong></li>
+                </ul>
+              </li>
+              <li>만들어진 지식 그래프는 다양한 downstream 작업에 쓸 수 있음
+                <ul>
+                  <li>downstream 작업의 한 예시로 <strong>캐릭터 챗봇</strong>을 구현</li>
+                  <li>세계관/설정 변경 놀이, 멀티에이전트 캐릭터 시뮬레이션 등 다양한 작업에 응용 가능</li>
+                </ul>
+              </li>
+            </ul>
+
+            <h3>결과</h3>
+            <ul>
+              <li>오리지널 애니메이션 ‘내친구가데뷔했고나는그녀의프로듀서가되었다’(24분×10화)를 기획서에서 출발해 <mark>103.7M 토큰</mark>으로 <mark>1화 각본 1,250줄</mark> 완성. 2화도 10개 씬 트리트먼트 작업 완료
+                <ul>
+                  <li>8개의 시퀀스, 15개의 씬, 5개의 비트 시트 등 모든 중간 결과물 공유 가능</li>
+                  <li>국어국문학 전공 작가 지망생에게 긍정적인 피드백을 받음</li>
+                </ul>
+              </li>
+              <li>유명 애니메이션 ‘마법소녀 마도카☆마기카’의 약 7%를 지식 그래프로 변환하고 마도카 캐릭터 챗봇에서 사용
+                <ul>
+                  <li><mark>노드 272개</mark>(원문 링크 노드 포함), <mark>엣지 714개</mark>로 소설의 초반 200줄을 표현</li>
+                  <li>일본어 말투까지 마도카(주인공)와 똑 닮은 챗봇 (실제로 대화해 보면 아주 재밌음)</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="project" id="self-improving-agent">
+        <header class="p-head p-banner p-banner--chart">
+          <img class="p-banner-img" src="images/rsi-banner.webp" width="936" height="545" loading="lazy" alt="자기개선 에이전트의 진화 lineage 트리. 각 노드는 한 세대의 에이전트와 점수를 나타내며, 가장 높은 점수 0.625는 초록 다이아몬드로 표시된 #12.">
+          <div class="p-banner-text">
+            <h2>Self-Improving Agent for Any Task</h2>
+            <p class="p-kind">자기개선 에이전트 연구</p>
+          </div>
+        </header>
+        <figure class="shots">
+          <div class="shots-scroll" tabindex="0" role="region" aria-label="Counterfactual 검증 다이어그램">
+            <a href="images/rsi-counterfactual.webp"><img src="images/rsi-counterfactual.webp" width="1491" height="704" loading="lazy" alt="Counterfactual 검증 다이어그램. 실제 라운드 1부터 k까지를 재생해 checkpoint를 만든 뒤, 원본 코드의 Control과 후보 패치를 적용한 Treatment로 분기해 각각 실제 reward를 얻는다. 두 분기는 같은 상태에서 출발하므로 결과 차이는 패치 때문이다."></a>
+          </div>
+          <figcaption>Counterfactual 검증: 실패 지점의 실제 checkpoint를 재구성한 뒤, 원본 코드(Control)와 패치를 적용한 코드(Treatment)로 분기해 실제 reward를 비교함.</figcaption>
+        </figure>
+        <div class="p-grid">
+          <aside class="p-meta" aria-label="프로젝트 정보">
+            <dl>
+              <dt>기반</dt>
+              <dd>DGM-H (HyperAgents), A-Mem</dd>
+              <dt>모델</dt>
+              <dd>DeepSeek-V4-Flash-0731<br>DeepSeek-R1-Distill-Qwen-32B</dd>
+              <dt>벤치마크</dt>
+              <dd>Deep-SWE<br>CMU-FoodTruck Bench</dd>
+              <dt>링크</dt>
+              <dd><a href="https://github.com/AliceOfSNU/HyperAgents">GitHub</a> (에이전트가 직접 올린 PR 포함)</dd>
+            </dl>
+          </aside>
+          <div class="p-body">
+            <p class="p-summary"><strong>DGM-H</strong>(HyperAgents)라는 자기개선 에이전트 위에 <strong>A-Mem</strong>(메모리)과 <strong>Causal Attribution</strong> 툴을 추가함. Deep-SWE에서는 DeepSeek-V4-Flash-0731 모델로 코딩 에이전트의 개선을, 더 작은 CMU-FoodTruck Bench에서는 DeepSeek-R1-Distill-Qwen-32B 모델로 가게 운영 에이전트의 개선을 확인함.</p>
+
+            <h3>방법</h3>
+            <ul>
+              <li>Agent trajectory에서 <strong>실패의 원인이 되는 지점을 특정</strong>(Causal Attribution)하고, 개선 에이전트가 Patch를 통해 <strong>행동이 수정되는지 빠르게 검증</strong>(Counterfactual Analysis)할 수 있는 툴을 제공해 자기개선의 효율을 높임</li>
+              <li>실패 지점에서 Agent가 보고 있던 상태를 정확히 재현하기 위해, Agent를 FSM으로 구현하고 trajectory의 모든 step에서 state를 저장하는 방식을 제안함</li>
+            </ul>
+
+            <h3>결과</h3>
+            <ul>
+              <li>DeepSWE subset 성공률 <mark>0.02 → 0.625</mark>. 기본 file tool만 가진 에이전트에서 출발해 Multi-pass와 Compaction을 지원하는 에이전트로 발전함
+                <ul>
+                  <li>코드 리뷰 pass와 엣지 케이스를 시험하는 adversarial pass 도입</li>
+                  <li>오래된 tool-call 결과를 점진적으로 truncate하는 compaction 도입</li>
+                </ul>
+              </li>
+              <li>자기개선 에이전트가 <mark>PR 23개</mark>를 오픈하고, 초기 에이전트가 가진 tool 관련 버그 2개를 수정함</li>
+              <li>메타 에이전트 자신에 대한 개선 (진정한 의미의 재귀적 자기개선)
+                <ul>
+                  <li>프롬프트를 재작성해 ‘이전 시도의 약점을 파악하고 타겟팅된 개선을 하라’는 지침을 세움</li>
+                  <li>에이전트의 진화 lineage와 각 세대의 eval report·점수를 요약해 자기 자신의 프롬프트에 주입하는 함수를 만듦</li>
+                  <li>bash.py처럼 위험한 파일을 건드릴 때 smoke test를 거치는 안전장치를 도입</li>
+                </ul>
+              </li>
+              <li>실제 Reward Hacking 시도들이 PR human-review 게이트에서 차단됨. Long-running loop에서 human supervision의 중요성을 확인함</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="project" id="flashmla">
+        <header class="p-head">
+          <h2>DSV FlashMLA Kernel Optimization Research</h2>
+          <p class="p-kind">GPU 커널 최적화</p>
+        </header>
+        <div class="p-grid">
+          <aside class="p-meta" aria-label="프로젝트 정보">
+            <dl>
+              <dt>모델</dt>
+              <dd>DeepSeek V4 Flash</dd>
+              <dt>환경</dt>
+              <dd>vLLM, NVIDIA B200</dd>
+              <dt>대상</dt>
+              <dd>FlashMLA SplitKV / Combine kernel</dd>
+            </dl>
+          </aside>
+          <div class="p-body">
+            <p class="p-summary">DeepSeek V4 Flash는 SWA, HCA, CSA의 세 가지 Attention tier로 길고 짧은 context를 통합함. vLLM에서 이 모델이 사용하는 B200 커널들을 프로파일링하고, FlashMLA의 SplitKV/Combine kernel을 최적화 대상으로 찾아냄.</p>
+
+            <h3>방법</h3>
+            <ul>
+              <li>MLA attention 안의 Split KV에 이어지는 Combine kernel을 최적화해 low-batch(long context) regime에서 decode 속도를 높임</li>
+              <li>thread당 in-flight prefetch 개수를 split 1개에서 8개로 늘려 메모리 latency를 감춤</li>
+            </ul>
+
+            <h3>결과</h3>
+            <ul>
+              <li>HCA attention의 combine kernel이 1M context, batch 8에서 <mark>8.8%</mark>, 256K context, batch 8에서 <mark>4.3%</mark> 빨라짐</li>
+              <li>CSA attention의 combine kernel이 batch 4에서 <mark>6.9%</mark> 빨라짐 (CSA는 context length와 무관)</li>
             </ul>
           </div>
         </div>
